@@ -4,6 +4,7 @@ import pyperclipimg as pcimg
 import PIL
 import matplotlib.pyplot as plt
 import numpy as np
+from pix2tex.cli import LatexOCR
 
 
 TEMP_IMAGE_PATH_INPUT = 'input/temp_input.png'
@@ -68,10 +69,20 @@ def plot2pil(plot):
 
     return PIL.Image.fromarray(buf)
 
+def img2tex(img):
+    model = LatexOCR()
+    return model(img)
 
 if __name__ == "__main__":
 
-    result = latex2image(r"""$\underset{S}{\int\int}\ \vec{\nabla}\times\vec{B}\cdot d\vec{S}=\underset{C}{\oint}\ \vec{B}\cdot d\vec{l},$""", TEMP_IMAGE_PATH_PREVIEW)
+    #result = latex2image(r"""$\underset{S}{\int\int}\ \vec{\nabla}\times\vec{B}\cdot d\vec{S}=\underset{C}{\oint}\ \vec{B}\cdot d\vec{l},$""", TEMP_IMAGE_PATH_PREVIEW)
+
+    mathjax ="x=3\times4"
+    # Ensure all backslashes are properly escaped
+    mathjax_fixed = mathjax#.replace("\\", r"\\")
+
+
+    result = latex2image(rf"""${repr(mathjax_fixed)[1:-1]}$""", None)
     plt.show() 
 
     newimg = plot2pil(result)

@@ -9,6 +9,8 @@ Follows a simple workflow:
 3. Compare the original figure to the displayed predicted figure
 4. If it seems good, copy the mathjax text from the textfield
 
+![image](preview.png)
+
 ## Installing
 
 - Follow the setup guide from LaTeX-OCR

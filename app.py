@@ -10,12 +10,7 @@ import pyperclip as pc
 class ImageViewer(QWidget):
     def __init__(self):
         super().__init__()
-
-        self.TEMP_IMG_PATH = "temp.png"
-        self.API_IMG_PREDICT = "http://127.0.0.1:8502/predict"
-
-
-        self.setWindowTitle("PIL Image Viewer")
+        self.setWindowTitle("LaTeX OCR GUI")
         self.setGeometry(100, 100, 500, 600)
         
         # Layout
@@ -37,7 +32,7 @@ class ImageViewer(QWidget):
         layout.addWidget(QLabel(text="Converts to:"), alignment=Qt.AlignCenter)
         layout.addWidget(self.image_predicted)
         # text copy
-        self.output_text = QTextEdit("This is a multi-line copyable text\nYou can copy me!")
+        self.output_text = QTextEdit("Predicted mathjax text will appear here!")
         self.output_text.setReadOnly(True)  # Make it read-only
         layout.addWidget(self.output_text, alignment=Qt.AlignCenter)
         self.copy_output = QPushButton("Copy Output")

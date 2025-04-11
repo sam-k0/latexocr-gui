@@ -3,3 +3,6 @@
 
 /.venv
 /.conda
+/build
+*.spec
+/dist

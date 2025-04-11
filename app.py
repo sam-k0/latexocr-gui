@@ -12,6 +12,8 @@ class ImageViewer(QWidget):
         super().__init__()
         self.setWindowTitle("LaTeX OCR GUI")
         self.setGeometry(100, 100, 500, 600)
+        self.setWindowIcon(QPixmap("icon.png"))
+        self.setWindowIconText("LaTeX OCR GUI")
         
         # Layout
         layout = QVBoxLayout()
@@ -54,12 +56,15 @@ class ImageViewer(QWidget):
         mathjax = ocrr.img2tex(clip_img)
         print(mathjax)
         # Render mathjax str to image
-        math_plot = ocrr.latex2image(rf"""${mathjax}$""", image_name=None) # None wont save
-
         self.output_text.setText(mathjax)
-
-        plot_img = ocrr.plot2pil(math_plot) # convert plot to pil image
-        self.set_pil_image(self.image_predicted, plot_img)
+        try:
+            math_plot = ocrr.latex2image(rf"""${mathjax}$""", image_name=None) # None wont save
+            plot_img = ocrr.plot2pil(math_plot) # convert plot to pil image
+            self.set_pil_image(self.image_predicted, plot_img)
+        except Exception as e:
+            print(e)
+            self.show_error("Invalid LaTeX", "The LaTeX code could not be rendered to an image.")
+            return
 
     
     def set_pil_image(self, label, pil_image):
